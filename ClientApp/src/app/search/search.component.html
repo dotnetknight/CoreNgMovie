@@ -1,0 +1,31 @@
+<section>
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" *ngIf="gettingData">
+    <mat-progress-spinner mode="indeterminate" *ngIf="gettingData"></mat-progress-spinner>
+    <p>Processing ...</p>
+  </form>
+</section>
+
+<section class="searchData" fxLayout fxLayoutAlign="center" fxLayoutGap="10px">
+  <mat-card fxFlex.xs="100%" fxFlex="30%">
+    <mat-card-content fxLayoutAlign="center">
+      <mat-form-field>
+        <input matInput (keyup)='keyUp.next($event.target.value)' placeholder="Search">
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<div id="card-container" fxLayoutAlign="center">
+  <mat-card *ngFor="let movie of searchDataList">
+    <mat-card-header fxLayoutAlign="center" class="seeDetailsBTN">
+      <mat-card-title fxLayoutAlign="center" *ngIf="movie.title">{{ movie.title }}</mat-card-title>
+    </mat-card-header>
+    <br />
+    <mat-card-content fxLayoutAlign="center" *ngIf="movie.poster_path">
+      <img src="{{'http://image.tmdb.org/t/p/original' + movie.poster_path }}" class="poster">
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center">
+      <button mat-raised-button color="primary" (click)="getMovieData(movie.id)" class="seeDetailsBTN">See Details</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

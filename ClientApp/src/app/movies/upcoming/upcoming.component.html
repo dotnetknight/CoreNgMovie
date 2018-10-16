@@ -1,0 +1,22 @@
+<div id="card-container" fxLayoutAlign="center" *ngIf="gotUpcomingData">
+  <mat-card *ngFor="let movie of upcomingMoviesList | slice:0:7; let i = index;">
+    <mat-card-header *ngIf="i < 7" fxLayoutAlign="center" class="seeDetailsBTN">
+      <mat-card-title fxLayoutAlign="center" *ngIf="movie.title">{{ movie.title }}</mat-card-title>
+    </mat-card-header>
+    <br />
+    <mat-card-content fxLayoutAlign="center" *ngIf="movie.poster_path">
+      <img src="{{'http://image.tmdb.org/t/p/original' + movie.poster_path }}" class="poster">
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center">
+      <button mat-raised-button (click)="getMovieData(movie.id)" class="seeDetailsBTN">See Details</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+<section>
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" *ngIf="!gotUpcomingData">
+    <mat-progress-spinner mode="indeterminate" *ngIf="!gotUpcomingData"></mat-progress-spinner>
+    <p>Processing ...</p>
+  </form>
+</section>

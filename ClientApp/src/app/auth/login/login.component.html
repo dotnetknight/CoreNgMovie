@@ -1,0 +1,20 @@
+<section>
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="login(f)" *ngIf="!gotDataVal">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Email" ngModel name="email" email required #emailInput="ngModel">
+      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error>
+      <mat-error *ngIf="emailInput.hasError('required')">Required field</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" ngModel name="passwordHash" required #passwordHashInput="ngModel">
+      <mat-error *ngIf="passwordHashInput.hasError('required')">Required field</mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+  </form>
+</section>
+<section>
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" *ngIf="gotDataVal">
+    <mat-progress-spinner mode="indeterminate" *ngIf="gotDataVal"></mat-progress-spinner>
+    <p>Processing ...</p>
+  </form>
+</section>
